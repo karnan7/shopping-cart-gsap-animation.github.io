@@ -10,7 +10,7 @@ body{
 }
 .showcase{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     min-height: 90vh;
     padding: 0rem 15%;
@@ -33,11 +33,12 @@ nav{
     font-weight: bold;
 }
 .image-container{
-    display: grid;
-    place-content: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     height: 80vh;
     flex: 1;
-    z-index: 1;
+    z-index: 2;
 }
 .image-container img{
     width: 80%;
@@ -46,6 +47,7 @@ nav{
     color: #fff;
     flex: 1;
     padding-bottom: 10rem;
+    text-align: center;
 }
 .showcase-title{
     font-size: 3rem;
@@ -61,6 +63,7 @@ nav{
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
     cursor: pointer;
+    font-size: 0.8rem;
 }
 .showcase-arrow{
     position: absolute;
@@ -77,11 +80,11 @@ nav{
 }
 .circle-2{
     left: 35%;
-    bottom: 15%;
+    bottom: 10%;
 }
 .circle-3{
     left: 20%;
-    top: 10%;
+    top: 15%;
     transform: scale(1.5);
 }
 .product-nav{
@@ -107,7 +110,7 @@ nav{
 }
 .product-gallery{
     display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap:2rem;
 }
 .product-gallery .product-img{
@@ -118,4 +121,46 @@ nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.card {
+  padding: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .showcase{
+        flex-direction: column;
+        padding: 10%;
+        justify-content: space-evenly;
+        min-height: 85vh;
+    }
+    .image-container{
+        min-height: 30vh;
+        justify-content: center;
+        order: 1;
+    }
+
+    .circle-1, .circle-2{
+        display: none;
+    }
+    .circle-3 {
+        top: 90%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(3);
+    }
+
+    .showcase-title{
+        font-size: 1.5rem;
+    }
+    .showcase-subtitle{
+        font-size: 1rem;
+        padding: 2rem 0rem;
+    }
+    .showcase-text{
+        padding-bottom:0 ;
+    }
+    .showcase-arrow{
+        right: 5;
+        bottom: 20%;
+        transform: scale(0.8);
+    }
 }
