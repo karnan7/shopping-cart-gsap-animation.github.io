@@ -8,6 +8,9 @@
 body{
     background: linear-gradient(260deg, #b75d62, #754d4f);
 }
+body::-webkit-scrollbar {
+    display: none;
+  }
 .showcase{
     display: flex;
     justify-content: space-between;
@@ -87,15 +90,13 @@ nav{
     top: 15%;
     transform: scale(1.5);
 }
-.product-nav{
-    min-height: 10vh;
-}
 .product-section{
     background: #fff;
     min-height: 90vh;
     position: absolute;
-    width: 100vw;
+    width: 100%;
     z-index:  5;
+    overflow: hidden;
 }
 .product-description{
     padding: 5% 15%;
@@ -110,6 +111,7 @@ nav{
 }
 .product-gallery{
     display: grid;
+    padding: 0% 15%;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap:2rem;
 }

@@ -1,5 +1,9 @@
-const tlLeave = gsap.timeline({defaults: {duration: 0.75, ease: 'Power2.easeOut'}});
-const tlEnter = gsap.timeline({defaults: {duration: 0.75, ease: 'Power2.easeOut'}});
+const tlLeave = gsap.timeline({
+    defaults: { duration: 0.75, ease: 'Power2.easeOut'},
+});
+const tlEnter = gsap.timeline({
+    defaults: {duration: 0.75, ease: 'Power2.easeOut'},
+});
 
 const leaveAnimation = (current, done) => {
     const product = current.querySelector(".image-container");
@@ -7,10 +11,25 @@ const leaveAnimation = (current, done) => {
     const circles = current.querySelectorAll(".circle");
     const arrow = current.querySelector(".showcase-arrow");
     return(
-        tlLeave.fromTo(arrow, { opacity: 1, y:0 }, { opacity: 0, y: 50}),
+        tlLeave.fromTo(
+            arrow, 
+            { opacity: 1, y: 0 }, 
+            { opacity: 0, y: 50,  }
+        ),
         tlLeave.fromTo(product, { y: 0, opacity: 1}, {y: 100, opacity: 0 }, "<"),
         tlLeave.fromTo(text, { y: 0, opacity: 1}, {y: 100, opacity: 0}, "<"),
-        tlLeave.fromTo(circles, { y: 0, opacity: 1}, {y: -200, opacity: 0, stagger: 0.15,ease: 'back.out(1.7)', duration:1, onComplete:done}, "<")
+        tlLeave.fromTo(
+            circles, 
+            { y: 0, opacity: 1}, 
+            {
+              y: -200, 
+              opacity: 0, 
+              stagger: 0.15,
+              ease: 'back.out(1.7)', 
+              duration:1,
+              onComplete: done 
+            }, "<"
+        )
     )
 }
 
@@ -21,11 +40,29 @@ const enterAnimation = (next, done, gradient) => {
     const arrow = next.querySelector(".showcase-arrow");
     
     return(
-        tlEnter.fromTo(arrow, { opacity: 0, y:50 }, { opacity: 1, y: 0}),
-        tlEnter.to( 'body', {background: gradient}, "<"),
+        tlEnter.fromTo(
+            arrow, 
+            { opacity: 0, y:50 }, 
+            { opacity: 1, y: 0},
+        ),
+        tlEnter.to( 
+            'body',
+            {background: gradient}, "<"
+        ),
         tlEnter.fromTo(product, { y: -100, opacity: 0}, {y: 0, opacity: 1 }, "<"),
         tlEnter.fromTo(text, { y: 100, opacity: 0}, {y: 0, opacity: 1}, "<"),
-        tlEnter.fromTo(circles, { y: -200, opacity: 0}, {y: 0, opacity: 1, stagger: 0.15,ease: 'back.out(1.7)', duration:1, onComplete:done}, "<")
+        tlEnter.fromTo(
+            circles, 
+            { y: -200, opacity: 0 }, 
+            {
+                y: 0, 
+                opacity: 1, 
+                stagger: 0.15,
+                ease: 'back.out(1.7)',
+                duration:1,
+                onComplete: done 
+            }, "<"
+        )
     )
 }
 
@@ -38,7 +75,7 @@ barba.init({
                 const done = this.async();
                 let next = data.next.container;
                 let gradient = getGradient(data.next.namespace);
-                gsap.to('body', {background: gradient});
+                gsap.set('body', {background: gradient});
                 enterAnimation(next, done, gradient);
             },
             leave(data){
@@ -54,7 +91,7 @@ barba.init({
             }
         },
         {
-            name:'page-transition',
+            name:'product-transition',
             sync:true,
             from:{namespace: ['handbag', 'product']},
             to:{namespace:['product', 'handbag']},
@@ -73,11 +110,15 @@ barba.init({
 })
 
 function productEnterAnimation(next, done){
-    tlEnter.fromTo(next, {y: "100%"}, {y: "0%"});
-    tlEnter.fromTo('.card', {opacity: 0, y: 50},{opacity: 1, y:0, stagger:0.1, onComplete: done})
+    tlEnter.fromTo(next, { y: "100%" }, { y: "0%" });
+    tlEnter.fromTo(
+        '.card', 
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, stagger: 0.1, onComplete: done }
+    )
 }
 function productLeaveAnimation(current, done){
-    tlLeave.fromTo(current, { y: "0%"}, { y: "100%", onComplete: done});
+    tlLeave.fromTo(current, { opacity: 1, y: "0%" }, { opacity: 0, y: "100%", onComplete: done});
 }
 
 function getGradient (name){
